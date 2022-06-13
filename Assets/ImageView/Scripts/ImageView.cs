@@ -123,7 +123,10 @@ public class ImageView : MonoBehaviour
         }
         else if (ScaleType == ScaleType.fitXY)
         {
-            
+            layoutGroup.childControlWidth = true;
+            layoutGroup.childControlHeight = true;
+            layoutGroup.childForceExpandWidth = true;
+            layoutGroup.childForceExpandHeight = true;
         }
         else if (ScaleType == ScaleType.matrix)
         {
