@@ -108,10 +108,6 @@ public class ImageView : MonoBehaviour
         {
 
         }
-        else if (ScaleType == ScaleType.centerInside)
-        {
-
-        }
         else if (ScaleType == ScaleType.fitCenter)
         {
             layoutGroup.childControlWidth = true;
@@ -122,24 +118,12 @@ public class ImageView : MonoBehaviour
             aspectRatio.aspectMode = viewRectTransform.CalculateRatio() > Texture.CalculateRatio() ? AspectRatioFitter.AspectMode.HeightControlsWidth : AspectRatioFitter.AspectMode.WidthControlsHeight;
             aspectRatio.aspectRatio = Texture.CalculateRatio();
         }
-        else if (ScaleType == ScaleType.fitStart)
-        {
-
-        }
-        else if (ScaleType == ScaleType.fitEnd)
-        {
-
-        }
         else if (ScaleType == ScaleType.fitXY)
         {
             layoutGroup.childControlWidth = true;
             layoutGroup.childControlHeight = true;
             layoutGroup.childForceExpandWidth = true;
             layoutGroup.childForceExpandHeight = true;
-        }
-        else if (ScaleType == ScaleType.matrix)
-        {
-
         }
     }
 
