@@ -83,6 +83,44 @@ public class ImageView : MonoBehaviour
 
         rawImage.texture = Texture;
         rawImage.color = Color.white;
+
+        SetScaleType();
+    }
+
+    private void SetScaleType()
+    {
+        if (ScaleType == ScaleType.center)
+        {
+
+        }
+        else if (ScaleType == ScaleType.centerCrop)
+        {
+
+        }
+        else if (ScaleType == ScaleType.centerInside)
+        {
+
+        }
+        else if (ScaleType == ScaleType.fitCenter)
+        {
+
+        }
+        else if (ScaleType == ScaleType.fitStart)
+        {
+
+        }
+        else if (ScaleType == ScaleType.fitEnd)
+        {
+
+        }
+        else if (ScaleType == ScaleType.fitXY)
+        {
+            
+        }
+        else if (ScaleType == ScaleType.matrix)
+        {
+
+        }
     }
 
     private IEnumerator GetTexture(string path, Action<Texture2D> action)
