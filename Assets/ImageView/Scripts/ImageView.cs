@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Image), typeof(Mask))]
+[RequireComponent(typeof(RectMask2D))]
 public class ImageView : MonoBehaviour
 {
     public Texture2D Texture;
@@ -14,6 +14,7 @@ public class ImageView : MonoBehaviour
 
     [Header("Background")]
     private Image backgroundImage;
+    private VerticalLayoutGroup layoutGroup;
 
     [Header("Child")]
     public GameObject ImageObject;
@@ -24,24 +25,40 @@ public class ImageView : MonoBehaviour
 
     public void ShowImageView()
     {
-        CreateImageObject();
+        CreateImageView();
         SetImageView();
     }
 
-    private void CreateImageObject()
+    #region Create Image View
+    private void CheckImageView()
     {
-        backgroundImage = GetComponent<Image>();
-
         if (ImageObject != null)
         {
             DestroyImmediate(ImageObject);
         }
+        if (backgroundImage != null)
+        {
+            DestroyImmediate(backgroundImage);
+        }
+        if (layoutGroup != null)
+        {
+            DestroyImmediate(layoutGroup);
+        }
+    }
+
+    private void CreateImageView()
+    {
+        CheckImageView();
+
+        backgroundImage = gameObject.AddComponent<Image>();
+        layoutGroup = gameObject.AddComponent<VerticalLayoutGroup>();
 
         ImageObject = new GameObject("Image");
         ImageObject.transform.parent = transform;
         aspectRatio = ImageObject.AddComponent<AspectRatioFitter>();
         rawImage = ImageObject.AddComponent<RawImage>();
     }
+    #endregion
 
     private void SetImageView()
     {
@@ -53,16 +70,17 @@ public class ImageView : MonoBehaviour
 
         if (!string.IsNullOrEmpty(Download))
         {
-            StartCoroutine(GetTexture(Download, texture =>
-            {
-                Texture = texture;
-                SetTexture();
-            }));
+            StartCoroutine(GetTexture(Download, texture => SetTexture(texture)));
         }
     }
 
-    private void SetTexture()
+    private void SetTexture(Texture2D texture = null)
     {
+        if (texture != null)
+        {
+            Texture = texture;
+        }
+
         rawImage.texture = Texture;
         rawImage.color = Color.white;
     }
