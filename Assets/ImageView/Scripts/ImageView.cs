@@ -20,6 +20,7 @@ public class ImageView : MonoBehaviour
     public GameObject ImageObject;
     private AspectRatioFitter aspectRatio;
     private RawImage rawImage;
+    private RectTransform rectTransform;
 
     private void Awake() => ShowImageView();
 
@@ -57,6 +58,7 @@ public class ImageView : MonoBehaviour
         ImageObject.transform.parent = transform;
         aspectRatio = ImageObject.AddComponent<AspectRatioFitter>();
         rawImage = ImageObject.AddComponent<RawImage>();
+        rectTransform = ImageObject.GetComponent<RectTransform>();
     }
     #endregion
 
@@ -91,7 +93,13 @@ public class ImageView : MonoBehaviour
     {
         if (ScaleType == ScaleType.center)
         {
+            rawImage.SetNativeSize();
 
+            layoutGroup.enabled = false;
+
+            rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            rectTransform.anchoredPosition = Vector2.zero;
         }
         else if (ScaleType == ScaleType.centerCrop)
         {
