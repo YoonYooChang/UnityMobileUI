@@ -1,3 +1,4 @@
+using jell22y.ImageView;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class ImageView : MonoBehaviour
     [Header("Background")]
     private Image backgroundImage;
     private VerticalLayoutGroup layoutGroup;
+    private RectTransform viewRectTransform;
 
     [Header("Child")]
     public GameObject ImageObject;
@@ -51,6 +53,7 @@ public class ImageView : MonoBehaviour
     {
         CheckImageView();
 
+        viewRectTransform = gameObject.GetComponent<RectTransform>();
         backgroundImage = gameObject.AddComponent<Image>();
         layoutGroup = gameObject.AddComponent<VerticalLayoutGroup>();
 
@@ -111,7 +114,13 @@ public class ImageView : MonoBehaviour
         }
         else if (ScaleType == ScaleType.fitCenter)
         {
+            layoutGroup.childControlWidth = true;
+            layoutGroup.childControlHeight = true;
+            layoutGroup.childForceExpandWidth = true;
+            layoutGroup.childForceExpandHeight = true;
 
+            aspectRatio.aspectMode = viewRectTransform.CalculateRatio() > Texture.CalculateRatio() ? AspectRatioFitter.AspectMode.HeightControlsWidth : AspectRatioFitter.AspectMode.WidthControlsHeight;
+            aspectRatio.aspectRatio = Texture.CalculateRatio();
         }
         else if (ScaleType == ScaleType.fitStart)
         {
