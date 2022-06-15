@@ -32,6 +32,18 @@ public class ImageView : MonoBehaviour
         SetImageView();
     }
 
+    public void SetTexture(Texture2D texture)
+    {
+        Texture = texture;
+        ShowImageView();
+    }
+
+    public void SetDownloadLink(string link)
+    {
+        Download = link;
+        ShowImageView();
+    }
+
     #region Create Image View
     private void CheckImageView()
     {
@@ -69,17 +81,17 @@ public class ImageView : MonoBehaviour
     {
         if (Texture != null)
         {
-            SetTexture();
+            ShowTexture();
         }
         backgroundImage.color = BackgroundColor;
 
         if (!string.IsNullOrEmpty(Download))
         {
-            StartCoroutine(GetTexture(Download, texture => SetTexture(texture)));
+            StartCoroutine(GetTexture(Download, texture => ShowTexture(texture)));
         }
     }
 
-    private void SetTexture(Texture2D texture = null)
+    private void ShowTexture(Texture2D texture = null)
     {
         if (texture != null)
         {
