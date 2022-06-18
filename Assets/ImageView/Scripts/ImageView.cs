@@ -118,7 +118,18 @@ public class ImageView : MonoBehaviour
         }
         else if (ScaleType == ScaleType.centerCrop)
         {
+            layoutGroup.enabled = false;
 
+            bool isFitWidth = viewRectTransform.CalculateRatio() > Texture.CalculateRatio();
+
+            rectTransform.anchorMin = new Vector2(isFitWidth ? 0 : 0.5f, isFitWidth ? 0.5f : 0);
+            rectTransform.anchorMax = new Vector2(isFitWidth ? 1 : 0.5f, isFitWidth ? 0.5f : 1);
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
+            rectTransform.anchoredPosition = Vector2.zero;
+
+            aspectRatio.aspectMode = isFitWidth ? AspectRatioFitter.AspectMode.WidthControlsHeight : AspectRatioFitter.AspectMode.HeightControlsWidth;
+            aspectRatio.aspectRatio = Texture.CalculateRatio();
         }
         else if (ScaleType == ScaleType.fitCenter)
         {
