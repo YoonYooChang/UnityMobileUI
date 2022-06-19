@@ -1,7 +1,11 @@
 # ImageView
-Android ImageViewÀÇ ScaleTypeÀ» Âü°íÇÏ¿© µ¿ÀÏÇÑ ÇüÅÂ·Î µ¿ÀÛÇÏµµ·Ï °³¹ß.
+Android ImageViewì˜ ScaleTypeì„ ì°¸ê³ í•˜ì—¬ ë™ì¼í•œ í˜•íƒœë¡œ ë™ì‘í•˜ë„ë¡ ê°œë°œ.
 
 ## Parameters
 - Enum ScaleType
+    - fit
+    - fitCenter
+    - fitXY
+    - centerCrop
 - Color Background
 - Texture2D Texture
