@@ -115,6 +115,7 @@ public class ImageView : MonoBehaviour
             rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
             rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
             rectTransform.anchoredPosition = Vector2.zero;
+            rectTransform.localScale = Vector3.one;
         }
         else if (ScaleType == ScaleType.centerCrop)
         {
