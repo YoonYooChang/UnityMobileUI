@@ -10,6 +10,10 @@ public class PullScrollView : ScrollRect, IDropHandler
     public UnityEvent OnBottomPull;
     public UnityEvent<float> OnTopPulling;
     public UnityEvent<float> OnBottomPulling;
+
+    private float previousPosition;
+
+    public float RequirePullDistance = 150f;
     #endregion
 
     public void OnDrop(PointerEventData eventData)
