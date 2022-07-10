@@ -22,11 +22,6 @@ public class PullScrollView : ScrollRect
 
     protected override void Start() => this.onValueChanged.AddListener(ScrollChanged);
 
-    private void ScrollChanged(Vector2 vector)
-    {
-        
-    }
-
     public override void OnBeginDrag(PointerEventData eventData)
     {
         base.OnBeginDrag(eventData);
@@ -39,5 +34,45 @@ public class PullScrollView : ScrollRect
         dragging = false;
     }
 
+    private void ScrollChanged(Vector2 vector)
+    {
+        float distance = CalculatePullDistance();
 
+
+    }
+
+    private float CalculatePullDistance()
+    {
+        float y = content.anchoredPosition.y;
+        float z = 0f;
+
+        if (verticalNormalizedPosition != 1f && verticalNormalizedPosition != 0f)
+        {
+            if (verticalNormalizedPosition < 0f)
+            {
+                z = y - previousPosition;
+            }
+            else
+            {
+                previousPosition = y;
+            }
+        }
+        else
+        {
+            z = y;
+        }
+
+        if (verticalNormalizedPosition >= 1)
+        {
+            return y;
+        }   
+        else if (verticalNormalizedPosition <= 0)
+        {
+            return z;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 }
